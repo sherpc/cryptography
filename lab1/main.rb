@@ -24,7 +24,7 @@ def generate_prime
 end
 
 def main
-  return if ARGV[0].nil? && ARFV[1].nil?
+  return if ARGV[0].nil? && ARGV[1].nil?
   if ARGV[0] == "-g"
     generate_prime 
   else
@@ -32,4 +32,6 @@ def main
   end
 end
 
-main 
+if __FILE__ == $0
+  main
+end
