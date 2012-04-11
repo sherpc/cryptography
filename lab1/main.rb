@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require "./miller_rabin"
 
 def read_number i
