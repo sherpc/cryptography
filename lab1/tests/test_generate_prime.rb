@@ -8,6 +8,7 @@ class TestGeneratePrime < Test::Unit::TestCase
 
   def test_generate_prime
     cases = [
+      [2, 2],
       [4, 5],
       [5, 5],
       [0, 2],
