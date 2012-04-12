@@ -22,6 +22,9 @@ class Integer
      end
      return true
    end
+
+   def witness? a
+   end
 end
  
 class << Integer
