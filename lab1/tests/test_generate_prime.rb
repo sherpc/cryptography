@@ -33,4 +33,17 @@ class TestGeneratePrime < Test::Unit::TestCase
     ]
     cases.each { |test_case| do_generate_prime_test *test_case }
   end
+
+  def do_witness_test n, a, expected
+    assert_equal n.witness?(a), expected
+  end
+
+  def test_witness
+    cases = [
+      [5, 2, false],
+      [9, 3, true],
+      [9, 2, true]
+    ]
+    cases.each { |test_case| do_witness_test *test_case }
+  end
 end

@@ -24,9 +24,26 @@ class Integer
    end
 
    def witness? a
+     n = self
+     n_1 = n - 1
+     # n-1 = (2**t) * u, t>= 1, u.odd? == true, n.odd? == true
+     u = n_1
+     t = 0
+     while u & 1 == 0
+       u >>= 1 
+       t += 1
+     end
+     x = ModMath.pow(a,u,n)
+     x_next = nil
+     (1..t).each do |i|
+       x_next = (x * x) % n
+       return true if x_next == 1 && x != 1 && x != n_1
+       x = x_next
+     end
+     return x_next != 1
    end
 end
- 
+
 class << Integer
   def generate_prime n
     until n.prime?
