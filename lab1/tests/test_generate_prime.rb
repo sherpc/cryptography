@@ -13,7 +13,8 @@ class TestGeneratePrime < Test::Unit::TestCase
       [3, true],
       [6, false],
       [647826745720384570138457353, true],
-      [1356496849687316874361684231, false]
+      [1356496849687316874361684231, false],
+      [111, false]
     ]
     cases.each { |test_case| do_is_prime_test *test_case }
   end
