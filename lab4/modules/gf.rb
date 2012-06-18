@@ -10,10 +10,10 @@ module GF
   def self.mul a, b
     r = 0
     for i in 0..7 do 
-      if b.bit(i)
-        r = r ^ a.apply(i,&:mul_x)
-      end
+        r ^= a.apply(i, &:mul_x) if b.bit(i)
     end
     r
+    # Ruby power -- one string analog!
+    #(0..7).inject(0) { |r, i| b.bit(i) ? r ^ a.apply(i, &:mul_x) : r }
   end
 end
