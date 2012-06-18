@@ -8,10 +8,12 @@ module GF
   end
 
   def self.mul a, b
+    r = 0
     for i in 0..7 do 
-      if (b & (1 << i)) != 0
-        
+      if b.bit(i)
+        r = r ^ self.mul02(a)
       end
     end
+    r
   end
 end
