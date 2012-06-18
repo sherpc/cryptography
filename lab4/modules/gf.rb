@@ -11,7 +11,7 @@ module GF
     r = 0
     for i in 0..7 do 
       if b.bit(i)
-        r = r ^ self.mul02(a)
+        r = r ^ a.apply(i,&:mul_x)
       end
     end
     r
