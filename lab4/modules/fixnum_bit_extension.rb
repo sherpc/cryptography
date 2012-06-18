@@ -11,6 +11,11 @@ module FixnumBitExtension
     end
   end
 
+  def inject_bit r=0, &block
+    self.each_bit { |b| r = yield r, b }
+    r
+  end
+
   def mul_x
     GF.mul02 self
   end

@@ -5,7 +5,7 @@ module AES
     q = GF.inv(a) || 0
 
     for i in 0..7 do
-      r = (r << 1) | bits.xorbits(q & m)
+      r = (r << 1) | (q & m).inject_bit { |r, b| r ^ b }
       m = (m >> 1) | ((m & 1) << 7)
     end
 

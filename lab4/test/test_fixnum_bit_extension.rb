@@ -20,6 +20,10 @@ class TestFixnumBitExtension < Test::Unit::TestCase
     do_each_bit_test 134
   end
 
+  def test_inject_bit
+    assert_equal 3, 14.inject_bit { |r, b| r + b }
+  end
+
   def test_apply
     assert_equal 2, 1.apply(&:succ)
     assert_equal 4, 1.apply(3,&:succ)
