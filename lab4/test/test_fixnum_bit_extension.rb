@@ -9,6 +9,17 @@ class TestFixnumBitExtension < Test::Unit::TestCase
     assert_equal true, 3.bit(0)
   end
 
+  def do_each_bit_test byte
+    s = ""
+    byte.each_bit { |b| s += b.to_s }
+    assert s.start_with? byte.to_s(2).reverse
+  end
+
+  def test_each_bit
+    do_each_bit_test 2
+    do_each_bit_test 134
+  end
+
   def test_apply
     assert_equal 2, 1.apply(&:succ)
     assert_equal 4, 1.apply(3,&:succ)

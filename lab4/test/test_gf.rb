@@ -15,5 +15,6 @@ class TestGF < Test::Unit::TestCase
   def test_inv
     assert_equal 1, GF.mul(GF.inv(0x3c), 0x3c)
     assert_equal 1, GF.mul(GF.inv(0x2a), 0x2a)
+    assert_equal nil, GF.inv(0)
   end
 end
