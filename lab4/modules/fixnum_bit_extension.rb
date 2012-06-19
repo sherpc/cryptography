@@ -6,7 +6,7 @@ module FixnumBitExtension
   def each_bit &block
     byte = self
     (0..7).each do |i| 
-      yield (byte & 1)
+      yield(byte & 1)
       byte >>= 1
     end
   end

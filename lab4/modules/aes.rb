@@ -8,8 +8,8 @@ module AES
     hash = (Digest::MD5.digest password.pack("C*")).bytes.to_a
     w = AESCore.key_expansion hash
 
-    length = split data.length, 16
-    result = AESCore.cipher length, w
+    result = AESCore.cipher data[0...16], w
+    return result
 
     (0...data.length).step(16).each do |i|
       input = data[i...i+16]
@@ -23,7 +23,8 @@ module AES
     hash = (Digest::MD5.digest password.pack("C*")).bytes.to_a
     w = AESCore.key_expansion hash
 
-    length = AESCore.inv_cipher data[0...16], w
+    result = AESCore.inv_cipher data[0...16], w
+    return result
     result = []
 
     (16...data.length).step(16).each do |i|

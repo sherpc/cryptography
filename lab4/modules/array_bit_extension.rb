@@ -4,7 +4,7 @@ module ArrayBitExtension
   end
 
   def shift_right n=1
-    self.shift_left (self.length-n)
+    self.shift_left(self.length-n)
   end
 
   def map_cell m=nil, &block

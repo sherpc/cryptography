@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 Dir[File.dirname(__FILE__) + '/modules/*.rb'].each {|file| require file }
 
 def write_bytes file, array
@@ -13,11 +14,11 @@ end
 if __FILE__ == $0
   case ARGV[0]
   when "-e"
-    encrypted = AES.encrypt_bytes read_bytes(ARGV[1]), "qwerty".bytes.to_a
-    write_bytes ARGV[2], encrypted
+    encrypted = AES.encrypt_bytes read_bytes(ARGV[1]), read_bytes(ARGV[2])
+    write_bytes ARGV[3], encrypted
   when "-d"
-    decrypted = AES.decrypt_bytes read_bytes(ARGV[1]), "qwerty".bytes.to_a
-    write_bytes ARGV[2], decrypted
+    decrypted = AES.decrypt_bytes read_bytes(ARGV[1]), read_bytes(ARGV[2])
+    write_bytes ARGV[3], decrypted
   when "-k"
     key = AES.generate_key read_bytes(ARGV[1])
     write_bytes ARGV[2], key
