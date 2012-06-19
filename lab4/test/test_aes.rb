@@ -8,9 +8,9 @@ class TestAES < Test::Unit::TestCase
     assert_equal 0x76, AES.sbox(15)
   end
   
-  def test_invsbox
-    assert_equal 0x52, AES.invsbox(0)
-    assert_equal 0x09, AES.invsbox(1)
+  def test_inv_sbox
+    assert_equal 0x52, AES.inv_sbox(0)
+    assert_equal 0x09, AES.inv_sbox(1)
   end
   
   def test_const
@@ -47,6 +47,7 @@ class TestAES < Test::Unit::TestCase
     w = AES.key_expansion(key)
     cipher = [57, 92, 186, 30, 30, 209, 113, 117, 13, 128, 2, 213, 87, 232, 85, 238]
     assert_equal cipher, AES.cipher(input, w)
+    assert_equal input, AES.inv_cipher(cipher, w)
   end
 end
 
