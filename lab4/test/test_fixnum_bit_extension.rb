@@ -27,6 +27,7 @@ class TestFixnumBitExtension < Test::Unit::TestCase
   def test_apply
     assert_equal 2, 1.apply(&:succ)
     assert_equal 4, 1.apply(3,&:succ)
+    assert_equal 1, 1.apply(0,&:succ)
   end
 
   def test_mul_x
