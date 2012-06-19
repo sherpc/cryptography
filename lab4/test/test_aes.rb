@@ -12,5 +12,9 @@ class TestAES < Test::Unit::TestCase
     assert_equal 0x52, AES.invsbox(0)
     assert_equal 0x09, AES.invsbox(1)
   end
+  
+  def test_const
+    assert_equal 4, AES::Nk
+  end
 end
 
