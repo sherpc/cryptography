@@ -42,7 +42,7 @@ class << Integer
 end
 
 module ModMath
-   def ModMath.pow(base, power, mod)
+   def self.pow(base, power, mod)
      result = 1
      while power > 0
        result = (result * base) % mod if power & 1 == 1

@@ -1,5 +1,9 @@
 module AES
   require 'digest/md5'
+  def self.generate_key password
+    hash = (Digest::MD5.digest password.pack("C*")).bytes.to_a
+  end
+
   def self.encrypt_bytes data, password
     hash = (Digest::MD5.digest password.pack("C*")).bytes.to_a
     w = AESCore.key_expansion hash
