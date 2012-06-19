@@ -7,6 +7,7 @@ class TestAES < Test::Unit::TestCase
     data = [116, 101, 115, 116, 116, 101, 115, 116, 116, 101, 115, 116, 116, 101, 115, 116, 116, 101, 115, 116, 116, 101, 115, 116]
     password = [113, 119, 101, 114, 116, 121]
     assert_equal result, AES.encrypt_bytes(data, password)
+    assert_equal data, AES.decrypt_bytes(result, password)
   end
 end
 
