@@ -1,33 +1,39 @@
 class Integer
-   def prime?
+   def prime?(k = 50)
      n = self.abs()
      return true if n == 2
      return false if n == 1 || n & 1 == 0
 
-     # cf. http://betterexplained.com/articles/another-look-at-prime-numbers/ and
-     # http://everything2.com/index.pl?node_id=1176369
-
-     return false if n > 3 && n % 6 != 1 && n % 6 != 5     # added
-
-     d = n-1
-     d >>= 1 while d & 1 == 0
-     20.times do                               # 20 = k from above
+     k.times do                               
        a = rand(n-2) + 1
-       t = d
-       y = ModMath.pow(a,t,n)                  # implemented below
-       while t != n-1 && y != 1 && y != n-1
-         y = (y * y) % n
-         t <<= 1
-       end
-       return false if y != n-1 && t & 1 == 0
+       return false if n.witness? a
      end
      return true
    end
+
+   def witness? a
+     n = self
+     n_1 = n - 1
+     # n-1 = (2**t) * u, t>= 1, u.odd? == true, n.odd? == true
+     u = n_1
+     t = 0
+     while u & 1 == 0
+       u >>= 1 
+       t += 1
+     end
+     x = ModMath.pow(a,u,n)
+     x_next = nil
+     (1..t).each do |i|
+       x_next = (x * x) % n
+       return true if x_next == 1 && x != 1 && x != n_1
+       x = x_next
+     end
+     return x_next != 1
+   end
 end
- 
+
 class << Integer
   def generate_prime n
-    return n if n.prime?
     until n.prime?
       n += 1
     end

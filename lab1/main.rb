@@ -9,7 +9,7 @@ end
 
 def write_answer is_prime
   File.open(ARGV[1], "w") do |f|
-    f << (is_prime ? 1 : 0)
+    f.puts(is_prime ? 1 : 0)
   end
 end
 
