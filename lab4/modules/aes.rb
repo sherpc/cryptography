@@ -44,6 +44,13 @@ module AES
     s
   end
 
+  def self.output_from state
+    output = []
+    i = 0
+    (0...Nb).each { |c| (0..3).each { |r| output[i] = state[r][c]; i += 1 } }
+    output
+  end
+
   def self.add_round_key s, w
     s.map_cell(w) { |c1,c2| c1 ^ c2 }
   end
@@ -65,23 +72,28 @@ module AES
   def self.mix_columns s, top_row
     for c in 0...Nb do
       col = []
-      (0..3).each { |r| colr[r] = s[r][c] }
-      k = toprow
+      (0..3).each { |r| col[r] = s[r][c] }
+      k = top_row
       for r in 0..3 do
         s[r][c] = scalar_mul k, col
+        k.shift_right
       end
     end
     s
   end
 
   def self.cipher input, w
-    s = self.state_from input
+    s = state_from input
     s = add_round_key s, w[0...Nb]
     for i in 1...Nr do
       s = apply_sbox s
       s = shift_rows s
+      s = mix_columns s, [2,3,1,1]
+      s = add_round_key s, w[(Nb * i)...(Nb * (i+1))]
     end
-
-    s
+    s = apply_sbox s
+    s = shift_rows s
+    s = add_round_key s, w[(Nb * Nr)...(Nb * (Nr+1))]
+    output_from s    
   end
 end
