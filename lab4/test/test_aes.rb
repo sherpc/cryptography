@@ -42,10 +42,11 @@ class TestAES < Test::Unit::TestCase
   end
 
   def test_cipher
-    input = [52, 49, 32, 56, 50, 32, 56, 49, 32, 50, 97, 32, 52, 48, 32, 51]
+    input = [95, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     key = [216,87,142,223,132,88,206,6,251,197,187,118,165,140,92,164]
     w = AES.key_expansion(key)
-    AES.cipher(input, w)
+    cipher = [57, 92, 186, 30, 30, 209, 113, 117, 13, 128, 2, 213, 87, 232, 85, 238]
+    assert_equal cipher, AES.cipher(input, w)
   end
 end
 

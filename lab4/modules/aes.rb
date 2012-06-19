@@ -52,7 +52,8 @@ module AES
   end
 
   def self.add_round_key s, w
-    s.map_cell(w) { |c1,c2| c1 ^ c2 }
+    (0...Nb).each { |c| (0..3).each { |r| s[r][c] = s[r][c] ^ w[c][r] } }
+    s
   end
   
   def self.apply_sbox s
@@ -75,8 +76,8 @@ module AES
       (0..3).each { |r| col[r] = s[r][c] }
       k = top_row
       for r in 0..3 do
-        s[r][c] = scalar_mul k, col
-        k.shift_right
+        s[r][c] = scalar_mul(k, col)
+        k = k.shift_right
       end
     end
     s
