@@ -48,6 +48,14 @@ class TestAESCore < Test::Unit::TestCase
     cipher = [57, 92, 186, 30, 30, 209, 113, 117, 13, 128, 2, 213, 87, 232, 85, 238]
     assert_equal cipher, AESCore.cipher(input, w)
     assert_equal input, AESCore.inv_cipher(cipher, w)
+
+    input = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x11]
+    key = [0xB6, 0x36, 0x4A, 0xC4, 0xE1, 0xDE, 0x1E, 0x28, 0x5E, 0xAF, 0x14, 0x4A, 0x24, 0x15, 0xF7, 0xA0]
+    w = AESCore.key_expansion(key)
+    cipher = [0xeb, 0xe2, 0xcd, 0x65, 0x19, 0xcb, 0xdc, 0xac, 0x4c, 0x64, 0x62, 0xe5, 0xd9, 0x69, 0x71, 0x11]
+    assert_equal cipher, AESCore.cipher(input, w)
+    assert_equal input, AESCore.inv_cipher(cipher, w)
+
   end
 end
 

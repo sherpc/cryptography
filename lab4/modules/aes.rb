@@ -5,37 +5,13 @@ module AES
   end
 
   def self.encrypt_bytes data, password
-    hash = (Digest::MD5.digest password.pack("C*")).bytes.to_a
-    password = [0] * 16 if password = []
     w = AESCore.key_expansion password
-
-    result = AESCore.cipher data[0...16], w
-    return result
-
-    (0...data.length).step(16).each do |i|
-      input = data[i...i+16]
-      input << 0 while input.length != 16
-      result += AESCore.cipher(input, w)
-    end
-    result
+    AESCore.cipher data[0...16], w
   end
 
   def self.decrypt_bytes data, password
-    hash = (Digest::MD5.digest password.pack("C*")).bytes.to_a
-    password = [0] * 16 if password = []
     w = AESCore.key_expansion password
-
-    result = AESCore.inv_cipher data[0...16], w
-    return result
-    result = []
-
-    (16...data.length).step(16).each do |i|
-      result += AESCore.inv_cipher(data[i...i+16], w)
-    end
-
-    length = merge length
-    result = result.first(length) if (length >= 0 && length <= result.length)
-    result
+    AESCore.inv_cipher data[0...16], w
   end
 
   def self.split int, bytes
