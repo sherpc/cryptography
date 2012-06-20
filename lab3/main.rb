@@ -5,7 +5,7 @@ def make_sqrt_list
     return cache if cache.has_value?(x)
     while(last_key != x) do
       last_key += 1
-      p last_key
+      #p last_key
       cache[last_key * last_key] = last_key
     end
     cache
@@ -32,8 +32,7 @@ end
 
 def assert n
   x, y = factorize(n)
-  p n == (x * y)
+  p [x, y]
+  raise "Error!" unless n == (x * y)
 end
-assert 33
-assert 21
-assert 45
+assert 34780051
