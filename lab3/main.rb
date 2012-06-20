@@ -15,7 +15,7 @@ end
 Sqrt_list = make_sqrt_list
 
 def is_sqrt? x, n
-  y2 = x ** 2 - n
+  y2 = x * x - n
   Sqrt_list[Math.sqrt(y2).ceil][y2]
 end
 
