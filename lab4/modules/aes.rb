@@ -6,7 +6,8 @@ module AES
 
   def self.encrypt_bytes data, password
     hash = (Digest::MD5.digest password.pack("C*")).bytes.to_a
-    w = AESCore.key_expansion hash
+    password = [0] * 16 if password = []
+    w = AESCore.key_expansion password
 
     result = AESCore.cipher data[0...16], w
     return result
@@ -21,7 +22,8 @@ module AES
 
   def self.decrypt_bytes data, password
     hash = (Digest::MD5.digest password.pack("C*")).bytes.to_a
-    w = AESCore.key_expansion hash
+    password = [0] * 16 if password = []
+    w = AESCore.key_expansion password
 
     result = AESCore.inv_cipher data[0...16], w
     return result
