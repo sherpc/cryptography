@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 def make_sqrt_list
   cache = { 1 => 1 }
   last_key = 1
@@ -35,4 +36,19 @@ def assert n
   p [x, y]
   raise "Error!" unless n == (x * y)
 end
-assert 34780051
+
+def read_number i
+  File.open(ARGV[i], "r") do |f|
+    f.readline.to_i
+  end
+end
+
+def write_answer x, y
+  File.open(ARGV[1], "w") do |f|
+    f.puts "#{x} #{y}"
+  end
+end
+
+if __FILE__ == $0
+  write_answer(*factorize(read_number(0)))
+end
